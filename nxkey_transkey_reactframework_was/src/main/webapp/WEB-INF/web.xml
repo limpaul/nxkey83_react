@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>nxkey_transkey_reactframework_was</display-name>
+
+<!--  nxkey 개인적으로 만든거 이므로 API문서에 포함 되지 않음 -->
+	<servlet>
+		<description></description>
+		<display-name>NxkeyDecode</display-name>
+		<servlet-name>NxkeyDecode</servlet-name>
+		<servlet-class>NxkeyDecode</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NxkeyDecode</servlet-name>
+		<url-pattern>/NxkeyDecode</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>NxKeyTNKSR</display-name>
+		<servlet-name>NxKeyTNKSR</servlet-name>
+		<servlet-class>NxKeyTNKSR</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NxKeyTNKSR</servlet-name>
+		<url-pattern>/NxKeyTNKSR</url-pattern>
+	</servlet-mapping>
+
+<!--  nxkey end -->
+
+
+<!-- transkey servlet 등록 필요  -->
+	<servlet>
+		<servlet-name>transkeyServlet</servlet-name>
+		<servlet-class>com.raonsecure.transkey.servlet.TranskeyServlet</servlet-class>
+		<init-param>
+			<param-name>isRealPath</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>isClassPath</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>iniFilePath</param-name>
+			<param-value>/WEB-INF/raon_config/config.ini</param-value>
+		</init-param>
+		<init-param>
+			<param-name>licenseIniPath</param-name>
+			<param-value>/WEB-INF/raon_config/transkey_license.ini</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>transkeyServlet</servlet-name>
+		<url-pattern>/transkeyServlet</url-pattern>
+	</servlet-mapping>
+</web-app>
