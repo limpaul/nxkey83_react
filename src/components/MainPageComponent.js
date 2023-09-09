@@ -2,6 +2,7 @@ import React from 'react';
 
 
 function MainPageComponent(){
+
     return (
         <>
             <h1>Main Page</h1>

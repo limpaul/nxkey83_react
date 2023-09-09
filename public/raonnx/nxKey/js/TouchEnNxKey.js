@@ -1466,7 +1466,7 @@ function DrawHiddenKeyElementForm(form) {
             var newEle = document.createElement("input");
             newEle.type = "hidden";
             newEle.name = hidkeyDataName;
-            //newEle.id = hidkeyDataId;
+            newEle.id = hidkeyDataName+"_"+form.id;
             Tk_InputErase(newEle);            
             form.appendChild(newEle);
         }
@@ -1478,7 +1478,7 @@ function DrawHiddenKeyElementForm(form) {
             var newEle = document.createElement("input");
             newEle.type = "hidden";
             newEle.name = hidEncDataName;
-            //newEle.id = hidEncDataId;
+            newEle.id = hidEncDataName+"_"+form.id;
             Tk_InputErase(newEle);
             form.appendChild(newEle);
         }
@@ -3476,7 +3476,8 @@ function Create_E2E_element_Form(eleObj) {
         if (E2E_eleObj == null) {
             E2E_eleObj = document.createElement("input");
             E2E_eleObj.type = "hidden";
-            E2E_eleObj.name = E2E_eleName;
+            E2E_eleObj.id = "E2E_" + eleObj.id; // bwlim
+            E2E_eleObj.name = E2E_eleName;      
             Tk_InputErase(E2E_eleObj);
             eleObj.form.appendChild(E2E_eleObj);
         }

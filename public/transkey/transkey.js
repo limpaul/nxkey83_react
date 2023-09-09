@@ -23,7 +23,7 @@ var transkey_apiuse = false; //default : false | use : true | not use : false
 var transkey_isMultiCursor = false;
 var transkey_isDraggable = true;
 var tk_useButton = true;
-var tk_useTranskey = true;
+var tk_useTranskey = false;
 var onKeyboard_allocate=false; //default : false
 var use_form_id = false;
 var useCSP = true; //default : false
@@ -45,11 +45,16 @@ var setNumberHash = "264051901014bb0062c359efd18a4eaac869d5ab84811714f0f11c0bf47
 //config
 
 
-document.write('<script type="text/javascript" src="'+transkey_url+'/TranskeyLibPack_op.js"></script>');
-document.write('<script type="text/javascript" src="'+transkey_url+'/rsa_oaep_files/rsa_oaep-min.js"></script>');
-document.write('<script type="text/javascript" src="'+transkey_url+'/jsbn/jsbn-min.js"></script>');
-document.write('<script type="text/javascript" src="'+transkey_url+'/typedarray.js"></script>');
+// script loaded replaced by bwlim
+/*
+ document.write('<script type="text/javascript" src="'+transkey_url+'/TranskeyLibPack_op.js"></script>');
+ document.write('<script type="text/javascript" src="'+transkey_url+'/rsa_oaep_files/rsa_oaep-min.js"></script>');
+ document.write('<script type="text/javascript" src="'+transkey_url+'/jsbn/jsbn-min.js"></script>');
+ document.write('<script type="text/javascript" src="'+transkey_url+'/typedarray.js"></script>');
+*/
 
+// script loaded replaced by bwlim
+/*
 if(transkey_apiuse){
 	document.write('<script type="text/javascript" src="'+transkey_apiurl+'service/token?'+new Date().getTime()+tk_origin+'"></script>');
 	document.write('<script type="text/javascript" src="'+transkey_apiurl+'service/inittime?'+tk_origin+'"></script>');
@@ -60,23 +65,47 @@ else{
 	document.write('<script type="text/javascript" src="'+transkey_surl+'?op=getInitTime'+tk_origin+'"></script>');
 	document.write('<script type="text/javascript" src="'+transkey_surl+'?op=getKeyboardHash'+tk_origin+'"></script>');
 }
+*/
+var scriptForNoApiuse = [
+transkey_url+'/TranskeyLibPack_op.js',
+transkey_url+'/rsa_oaep_files/rsa_oaep-min.js',
+transkey_url+'/jsbn/jsbn-min.js',
+transkey_url+'/typedarray.js',
+transkey_surl+'?op=getToken&'+new Date().getTime()+tk_origin,
+transkey_surl+'?op=getInitTime'+tk_origin,
+transkey_surl+'?op=getKeyboardHash'+tk_origin];
+
+var scriptForApiuse = [
+transkey_url+'/TranskeyLibPack_op.js',
+transkey_url+'/rsa_oaep_files/rsa_oaep-min.js',
+transkey_url+'/jsbn/jsbn-min.js',
+transkey_url+'/typedarray.js',
+transkey_apiurl+'?op=getToken&'+new Date().getTime()+tk_origin,
+transkey_apiurl+'service/inittime?'+tk_origin,
+transkey_apiurl+'service/getkeyboardhash?'+tk_origin];
+
+if(transkey_apiuse){
+	for(var i = 0 ; i < scriptForApiuse.length; i++){
+		var script = document.createElement('script');
+		script.type='text/javascript';	
+		script.src=scriptForApiuse[i];
+		document.head.appendChild(script);
+	}
+}else{
+	for(var i = 0 ; i < scriptForNoApiuse.length; i++){
+		var script = document.createElement('script');
+		script.type='text/javascript';	
+		script.src=scriptForNoApiuse[i];
+		document.head.appendChild(script);
+	}
+	script.onload = function(){
+		setTimeout(function(){
+			initTranskey();
+		}, 300)
+	}
+}
 
 
-//document.write('<script type="text/javascript" src="'+transkey_url+'/TranskeyLibPack_op.js" nonce="abcd1234"></script>');
-//document.write('<script type="text/javascript" src="'+transkey_url+'/rsa_oaep_files/rsa_oaep-min.js" nonce="abcd1234"></script>');
-//document.write('<script type="text/javascript" src="'+transkey_url+'/jsbn/jsbn-min2.js" nonce="abcd1234"></script>');
-//document.write('<script type="text/javascript" src="'+transkey_url+'/typedarray.js" nonce="abcd1234"></script>');
-//
-//if(transkey_apiuse){
-//	document.write('<script type="text/javascript" src="'+transkey_apiurl+'service/token?'+new Date().getTime()+tk_origin+'" nonce="abcd1234" ></script>');
-//	document.write('<script type="text/javascript" src="'+transkey_apiurl+'service/inittime?'+tk_origin+'" nonce="abcd1234"></script>');
-//	document.write('<script type="text/javascript" src="'+transkey_apiurl+'service/getkeyboardhash?'+tk_origin+'" nonce="abcd1234"></script>');
-//}
-//else{
-//	document.write('<script type="text/javascript" src="'+transkey_surl+'?op=getToken&'+new Date().getTime()+tk_origin+'" nonce="abcd1234"></script>');
-//	document.write('<script type="text/javascript" src="'+transkey_surl+'?op=getInitTime'+tk_origin+'" nonce="abcd1234"></script>');
-//	document.write('<script type="text/javascript" src="'+transkey_surl+'?op=getKeyboardHash'+tk_origin+'" nonce="abcd1234"></script>');
-//}
 
 
 

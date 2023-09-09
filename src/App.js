@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import LoginComponent from './components/LoginComponent';
 import LoginBaiscComponent from './components/LoginBasicComponent'
 import TranskeyLoginComponent from './components/TranskeyLoginComponent';
+import LoginBasicToServerComponent from './components/LoginBasicToServerComponent';
 function App() {
 
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
             <Route path="/" element={<MainPageComponent/>} />
             <Route path="/noLogin" element={<LoginBaiscComponent/>} />
+            <Route path="/loginToServer" element={<LoginBasicToServerComponent/>} />
             <Route path="/login" element={<LoginComponent/>} />
             <Route path="/transkey" element={<TranskeyLoginComponent/>} />
         </Routes>
