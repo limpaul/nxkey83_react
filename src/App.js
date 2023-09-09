@@ -4,6 +4,7 @@ import MainPageComponent from './components/MainPageComponent';
 import Nav from './components/Nav';
 import LoginComponent from './components/LoginComponent';
 import LoginBaiscComponent from './components/LoginBasicComponent'
+import TranskeyLoginComponent from './components/TranskeyLoginComponent';
 function App() {
 
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route path="/" element={<MainPageComponent/>} />
             <Route path="/noLogin" element={<LoginBaiscComponent/>} />
             <Route path="/login" element={<LoginComponent/>} />
+            <Route path="/transkey" element={<TranskeyLoginComponent/>} />
         </Routes>
       </div>
     </BrowserRouter>
